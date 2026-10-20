@@ -1,0 +1,132 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioFlow: Circadian Rhythm & Productivity Aligner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="logo-area">
+            <div class="logo-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+            <h1>BioFlow</h1>
+        </div>
+        <p class="tagline">Align your daily workflow with your biological peak performance windows.</p>
+    </header>
+
+    <main class="main-container">
+        <!-- Control Panel / Setup -->
+        <section class="control-panel glass-card">
+            <h2>Chronotype Configuration</h2>
+            <div class="config-grid">
+                <div class="input-group">
+                    <label for="chronotype">Select Your Chronotype</label>
+                    <select id="chronotype">
+                        <option value="lion">Lion (Early Bird - Peak Energy: Morning)</option>
+                        <option value="bear" selected>Bear (Solar Cycle - Peak Energy: Mid-Morning)</option>
+                        <option value="wolf">Wolf (Night Owl - Peak Energy: Evening)</option>
+                        <option value="dolphin">Dolphin (Light Sleeper - Peak Energy: Late Morning)</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="wakeTime">Target Wake-up Time</label>
+                    <input type="time" id="wakeTime" value="07:00">
+                </div>
+                <div class="input-group">
+                    <label for="workload">Daily Focus Target</label>
+                    <select id="workload">
+                        <option value="standard">Standard (4 hours deep work)</option>
+                        <option value="intensive" selected>Intensive (6 hours deep work)</option>
+                        <option value="creative">Creative (Exploratory & Ideation)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="action-row">
+                <button id="generateBtn" class="primary-btn">Calculate Circadian Schedule</button>
+            </div>
+        </section>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Current Status Widget -->
+            <section class="status-card glass-card">
+                <div class="status-header">
+                    <h3>Current Biological Phase</h3>
+                    <span id="currentTimeDisplay" class="time-badge">--:--</span>
+                </div>
+                <div class="phase-info">
+                    <div id="currentPhaseName" class="phase-title">Select schedule to begin</div>
+                    <p id="currentPhaseDesc" class="phase-desc">Configure your wake time and chronotype above to map your optimal cognitive and physical state for right now.</p>
+                </div>
+                <div class="energy-meter-container">
+                    <div class="meter-label">
+                        <span>Estimated Cognitive Energy</span>
+                        <span id="energyPercent">0%</span>
+                    </div>
+                    <div class="progress-track">
+                        <div id="energyFill" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Task Matcher Widget -->
+            <section class="task-card glass-card">
+                <h3>Task Energy Matcher</h3>
+                <p class="sub-text">Add your tasks to automatically find their ideal execution window.</p>
+                <div class="task-input-row">
+                    <input type="text" id="taskInput" placeholder="Enter task name (e.g., Q3 Financial Review)...">
+                    <select id="taskCognitive">
+                        <option value="high">High Cognitive (Deep Work)</option>
+                        <option value="medium" selected>Medium Cognitive (Meetings/Emails)</option>
+                        <option value="low">Low Cognitive (Admin/Routine)</option>
+                    </select>
+                    <button id="addTaskBtn" class="secondary-btn">Add Task</button>
+                </div>
+                <div class="task-list-wrapper">
+                    <ul id="taskList" class="task-list">
+                        <!-- Dynamically populated -->
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- 24-Hour Interactive Timeline -->
+        <section class="timeline-section glass-card">
+            <div class="timeline-header">
+                <h3>24-Hour Circadian Flow Timeline</h3>
+                <div class="legend">
+                    <span class="legend-item"><span class="dot peak"></span> Peak Focus</span>
+                    <span class="legend-item"><span class="dot steady"></span> Steady State</span>
+                    <span class="legend-item"><span class="dot dip"></span> Afternoon Dip</span>
+                    <span class="legend-item"><span class="dot winddown"></span> Melatonin / Wind Down</span>
+                </div>
+            </div>
+            <div class="timeline-canvas-container">
+                <canvas id="circadianCanvas" width="1000" height="180"></canvas>
+            </div>
+            <div class="timeline-slider-wrap">
+                <label for="timeScrubber">Scrub 24h Timeline:</label>
+                <input type="range" id="timeScrubber" min="0" max="1440" value="420" step="15">
+                <span id="scrubberTimeVal" class="scrubber-val">07:00 AM</span>
+            </div>
+        </section>
+
+        <!-- Phase Details Breakdown -->
+        <section class="breakdown-section glass-card">
+            <h3>Circadian Phase Breakdown</h3>
+            <div id="phaseBreakdownGrid" class="breakdown-grid">
+                <!-- Populated via JS -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>BioFlow &bull; Designed for peak performance, natural rest, and cognitive longevity.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
